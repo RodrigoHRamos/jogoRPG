@@ -1,6 +1,6 @@
 package jogo.rpg.modelo;
 
-public class FactoryPersonagem {
+public class PersonagemFactory {
 
 	public IPersonagem criarNovoPersonagem(String nome) {
 		IPersonagem personagem = new Personagem(nome);

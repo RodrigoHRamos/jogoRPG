@@ -1,7 +1,7 @@
 package jogo.rpg.controle;
 
 import jogo.rpg.Jogo;
-import jogo.rpg.modelo.FactoryPersonagem;
+import jogo.rpg.modelo.PersonagemFactory;
 import jogo.rpg.modelo.IPersonagem;
 import jogo.rpg.modelo.Partida;
 import java.util.Map;
@@ -57,9 +57,9 @@ public class ControladorDaPartida {
 	}
 
 	public static List<IPersonagem> obterPersonagens() {
-		IPersonagem conrar = new FactoryPersonagem().criarNovoPersonagem("Conrar", 10, 3, 7, 7, 3);
-		IPersonagem leofcon = new FactoryPersonagem().criarNovoPersonagem("Leofcon", 3, 10, 7, 3, 7);
-		IPersonagem tonkim = new FactoryPersonagem().criarNovoPersonagem("Tonkim", 6, 6, 6, 6, 6);
+		IPersonagem conrar = new PersonagemFactory().criarNovoPersonagem("Conrar", 10, 3, 7, 7, 3);
+		IPersonagem leofcon = new PersonagemFactory().criarNovoPersonagem("Leofcon", 3, 10, 7, 3, 7);
+		IPersonagem tonkim = new PersonagemFactory().criarNovoPersonagem("Tonkim", 6, 6, 6, 6, 6);
 
 		return Arrays.asList(conrar, leofcon, tonkim);
 	}

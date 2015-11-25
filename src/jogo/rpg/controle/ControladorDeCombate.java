@@ -4,7 +4,7 @@ import jogo.rpg.modelo.ComandoFactory;
 import jogo.rpg.modelo.ComandoAtacar;
 import jogo.rpg.modelo.ComandoDefender;
 import jogo.rpg.modelo.ComandoEsquivar;
-import jogo.rpg.modelo.FactoryPersonagem;
+import jogo.rpg.modelo.PersonagemFactory;
 import jogo.rpg.modelo.IPersonagem;
 import jogo.rpg.modelo.Partida;
 import jogo.rpg.modelo.Personagem;
@@ -82,7 +82,7 @@ public class ControladorDeCombate {
 
 	public void criarOponente() {
 		/*TODO Falta elaborar a lógica para a criação dos atributos do oponente, por equanto vai um valor padrão*/
-		oponente = new FactoryPersonagem().criarNovoPersonagem("Oponente");
+		oponente = new PersonagemFactory().criarNovoPersonagem("Oponente");
 		//TODO falta elaborar a lógica aqui tb
 		oponente.posicionar(3, 3);
 	}
