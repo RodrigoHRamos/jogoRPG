@@ -1,6 +1,9 @@
 package jogo.rpg.controle;
 
 import jogo.rpg.modelo.ComandoFactory;
+import jogo.rpg.modelo.Equipamento;
+import jogo.rpg.modelo.EquipamentoAtaque;
+import jogo.rpg.modelo.EquipamentoDefesa;
 import jogo.rpg.modelo.ComandoAtacar;
 import jogo.rpg.modelo.ComandoDefender;
 import jogo.rpg.modelo.ComandoEsquivar;
@@ -8,6 +11,9 @@ import jogo.rpg.modelo.PersonagemFactory;
 import jogo.rpg.modelo.IPersonagem;
 import jogo.rpg.modelo.Partida;
 import jogo.rpg.modelo.Personagem;
+
+import java.util.Random;
+
 import jogo.rpg.modelo.Arena;
 
 public class ControladorDeCombate {
@@ -39,19 +45,40 @@ public class ControladorDeCombate {
 		criarOponente();
 		criarArena();
 		
-		//TODO
-		// criar equipamentos de ataque e defesa
-		// equipar jogador e oponente
 		
-		//TODO o posicionamento dos personagens está hardcoded pq ainda falta fazer a lógica disso
+		
+		//-------CRIA EQUIPAMENTOS E EQUIPA -----//
+			//TODO
+			// criar equipamentos de ataque e defesa
+			// equipar jogador e oponente
+		
+		// Só pode criar equipamento para o personagemPrincipal uma vez.
+		if(Partida.getCombate()==1){
+			criarEquipamentos(personagemPrincipal);
+			criarEquipamentos(oponente);
+		}
+		else{
+			criarEquipamentos(oponente);
+		}
+		
+		//-------FIM CRIA EQUIPAMENTOS E EQUIPA -----//
+		
+		
+		//-------POSICIONAMENTO NA ARENA -----//
+		
+			//TODO o posicionamento dos personagens está hardcoded pq ainda falta fazer a lógica disso.
+			//Como o foco do projeto é a modelagem, creio que pode ficar assim mesmo.
+		
 		personagemPrincipal.posicionar(1, 4);
 		oponente.posicionar(3, 3);
-		
 		posicionarNaArena(personagemPrincipal, true);
 		posicionarNaArena(oponente, false);
+		
+		//-------FIM DO POSICIONAMENTO NA ARENA -----//
+		
 		arena.exibir();
 		exibirAcoesCombate();
-
+		
 	}
 
 	public void exibirAcoesCombate() {
@@ -81,7 +108,7 @@ public class ControladorDeCombate {
 	}
 
 	public void criarOponente() {
-		/*TODO Falta elaborar a lógica para a criação dos atributos do oponente, por equanto vai um valor padrão*/
+		//TODO Falta elaborar a lógica para a criação dos atributos do oponente, por equanto vai um valor padrão
 		oponente = new PersonagemFactory().criarNovoPersonagem("Oponente");
 		//TODO falta elaborar a lógica aqui tb
 		oponente.posicionar(3, 3);
@@ -89,6 +116,38 @@ public class ControladorDeCombate {
 
 	public void criarArena() {
 		this.arena = new Arena();
+	}
+	
+	/**
+	 * Cria um equipamento de defesa e um ataque de forma aleatória para o personagem recebido como parametro.
+	 * Deve ser chamado apenas uma vez para o Personagem principal e sempre que for criar um novo oponente.
+	 * Existe 50% de chance da arma ser de corpo a corpo ou de distância
+	 * o Poder de Ataque ou de Defesa é: random de 0 a 9 + 2x a quantidade de combates
+	 * */	
+	public void criarEquipamentos(IPersonagem personagem){
+		//Cria os equipamentos usando "sorte"
+		int randomico;
+		boolean bool;
+		randomico = numeroAleatorio(10);
+		if(randomico%2==0)
+			bool=true;
+		else
+			bool=false;
+		EquipamentoAtaque ataque = new EquipamentoAtaque(randomico+(Partida.getCombate()*2),bool);
+		randomico = numeroAleatorio(10);
+		EquipamentoDefesa defesa = new EquipamentoDefesa(randomico+(Partida.getCombate()*2));
+		//Equipa os equipamentos no personagem
+		personagem.equipar(ataque, defesa);			
+	}
+	/**
+	 * Retorna um numero aleatorio de acordo com o valor recebido como param, exe: param = 2 retorna 0 ou 1; param 100 retorna de 0 a 99.
+	 * Útil para gerar atributos randomicos para os Personagens e verificar verdadeiros ou falso aleatóriamente.
+	 * Utilizar qdo o sistema depender de "Sorte".
+	 * */
+	public int numeroAleatorio(int num){
+		Random randomGenerator = new Random();
+		int randomInt = randomGenerator.nextInt(num);
+		return randomInt;
 	}
 
 }

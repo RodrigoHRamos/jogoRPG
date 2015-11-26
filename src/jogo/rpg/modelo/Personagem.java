@@ -52,7 +52,7 @@ public class Personagem implements IPersonagem {
 		this.pontosDeVida = this.vitalidade *10;
 	}
 
-	public void equipar(EquipamentoAtaque ataque, EquipamentoDesefa defesa) {
+	public void equipar(EquipamentoAtaque ataque, EquipamentoDefesa defesa) {
 
 	}
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface IPersonagem {
 
-	public abstract void equipar(EquipamentoAtaque ataque, EquipamentoDesefa defesa);
+	public abstract void equipar(EquipamentoAtaque ataque, EquipamentoDefesa defesa);
 	
 	public abstract void reduzPontosDeVida(int dano);
 	
