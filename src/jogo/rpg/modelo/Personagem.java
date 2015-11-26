@@ -143,6 +143,7 @@ public class Personagem implements IPersonagem {
 	/**
 	 * retorna uma string já formatada com as informacoes do personagem
 	 * */
+	//TODO acrescentar informações dos equipamentos
 	public String exibirInforPersonagem() {
 		//Ainda falta colocar todas as outras informações do persongem
 		String retorno;
