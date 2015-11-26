@@ -27,4 +27,14 @@ public class EquipamentoAtaque extends Equipamento {
 		this.poderDeDano = poderDeDano;
 	}
 
+	@Override
+	public String informaçãoEquipamento() {
+		String retorno;
+		if(isAtacaDistancia())
+			retorno="Arma de ataque a distância com dano de: "+getPoderDeDano();
+		else
+			retorno="Arma de ataque corpo a corpo com dano de: "+getPoderDeDano();
+		return retorno;
+	}
+
 }

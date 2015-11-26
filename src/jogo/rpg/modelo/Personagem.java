@@ -147,9 +147,11 @@ public class Personagem implements IPersonagem {
 	public String exibirInforPersonagem() {
 		//Ainda falta colocar todas as outras informações do persongem
 		String retorno;
-		retorno = "\tInformacoes do personagem: " + getNome() + " | Pontos de vida: " + getPontosDeVida()
+		retorno = "\t" + getNome() + " | Pontos de vida: " + getPontosDeVida()
 					+ " - Força: " + getForça() + ", Percepção: " + getPercepcao() + ", Destreza: " + getDestreza() 
 					+ ", Vitalidade: " + getVitalidade() + ", Agilidade: " + getAgilidade();
+					//+ "Equipamento de Ataque | Dano:" + getEquipamentoAtaque().informaçãoEquipamento()
+					//+ "Equipamento de Defesa | Poder:" + getEquipamentoDefesa().informaçãoEquipamento();
 		return retorno;
 	}
 

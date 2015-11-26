@@ -16,4 +16,11 @@ public class EquipamentoDefesa extends Equipamento {
 		this.poderDeDefesa = poderDeDefesa;
 	}
 
+	@Override
+	public String informaçãoEquipamento() {
+		String retorno;
+		retorno = "Equipamento com poder de defesa de: "+getPoderDeDefesa();
+		return retorno;
+	}
+
 }

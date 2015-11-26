@@ -39,18 +39,10 @@ public class ControladorDeCombate {
 	}
 
 	public void inicarCombate() {
-		System.out.println("Inicio do combate nº:" + Partida.getCombate());
-		System.out.println("Informaçoes do personagem principal:");
-		System.out.println(personagemPrincipal.exibirInforPersonagem());
 		criarOponente();
-		criarArena();
-		
-		
+		criarArena();	
 		
 		//-------CRIA EQUIPAMENTOS E EQUIPA -----//
-			//TODO
-			// criar equipamentos de ataque e defesa
-			// equipar jogador e oponente
 		
 		// Só pode criar equipamento para o personagemPrincipal uma vez.
 		if(Partida.getCombate()==1){
@@ -76,6 +68,12 @@ public class ControladorDeCombate {
 		
 		//-------FIM DO POSICIONAMENTO NA ARENA -----//
 		
+		//-------EXIBIÇÃO DE INFORMAÇÕES DO ESTADO ATUAL DA PARTIDA -----//
+		System.out.println("\n\n\n\n");
+		System.out.println("Inicio do combate nº:" + Partida.getCombate());
+		System.out.println("Informações dos personagens:");
+		System.out.println(personagemPrincipal.exibirInforPersonagem());
+		System.out.println(oponente.exibirInforPersonagem());
 		arena.exibir();
 		exibirAcoesCombate();
 		
@@ -149,5 +147,7 @@ public class ControladorDeCombate {
 		int randomInt = randomGenerator.nextInt(num);
 		return randomInt;
 	}
+	
+	
 
 }
