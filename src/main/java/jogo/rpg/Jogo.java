@@ -103,6 +103,7 @@ public class Jogo {
 	}
 
 	public static void finalizarJogo() {
+		System.out.println(">>> JOGO ENCERRADO <<<");
 		System.exit(0);
 	}
 
