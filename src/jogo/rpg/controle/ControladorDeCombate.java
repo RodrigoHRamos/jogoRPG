@@ -75,6 +75,7 @@ public class ControladorDeCombate {
 		System.out.println(personagemPrincipal.exibirInforPersonagem());
 		System.out.println(oponente.exibirInforPersonagem());
 		arena.exibir();
+		//personagemPrincipal.get
 		exibirAcoesCombate();
 		
 	}

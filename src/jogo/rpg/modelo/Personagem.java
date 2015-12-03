@@ -24,11 +24,13 @@ public class Personagem implements IPersonagem {
 	
 	private Comando acao;
 
-	private Equipamento equipamentoAtaque;
+	private EquipamentoAtaque equipamentoAtaque;
 
-	private Equipamento[] equipamentos;
-
-	private Equipamento equipamentoDefesa;
+	private EquipamentoAtaque[] equipamentosAtaque;
+	
+	private EquipamentoDefesa equipamentoDefesa;
+	
+	private EquipamentoDefesa[] equipamentosDefesa;
 
 	public Personagem(String nome, int forca, int percepcao, int destreza, int vitalidade, int agilidade) {
 		this.nome = nome;
@@ -40,7 +42,7 @@ public class Personagem implements IPersonagem {
 		this.vitalidade = vitalidade;
 		this.pontosDeVida = this.vitalidade *10;
 	}
-	
+	//Dados padrão do oponente
 	public Personagem(String nome){
 		this.nome = nome;
 		this.força = 5;
@@ -53,7 +55,8 @@ public class Personagem implements IPersonagem {
 	}
 
 	public void equipar(EquipamentoAtaque ataque, EquipamentoDefesa defesa) {
-
+		this.equipamentoAtaque = ataque;
+		this.equipamentoDefesa = defesa;
 	}
 
 	public String getNome() {
@@ -108,23 +111,15 @@ public class Personagem implements IPersonagem {
 		return equipamentoAtaque;
 	}
 
-	public void setEquipamentoAtaque(Equipamento equipamentoAtaque) {
+	public void setEquipamentoAtaque(EquipamentoAtaque equipamentoAtaque) {
 		this.equipamentoAtaque = equipamentoAtaque;
-	}
-
-	public Equipamento[] getEquipamentos() {
-		return equipamentos;
-	}
-
-	public void setEquipamentos(Equipamento[] equipamentos) {
-		this.equipamentos = equipamentos;
 	}
 
 	public Equipamento getEquipamentoDefesa() {
 		return equipamentoDefesa;
 	}
 
-	public void setEquipamentoDefesa(Equipamento equipamentoDefesa) {
+	public void setEquipamentoDefesa(EquipamentoDefesa equipamentoDefesa) {
 		this.equipamentoDefesa = equipamentoDefesa;
 	}
 
@@ -150,10 +145,11 @@ public class Personagem implements IPersonagem {
 		retorno = "\t" + getNome() + " | Pontos de vida: " + getPontosDeVida()
 					+ " - Força: " + getForça() + ", Percepção: " + getPercepcao() + ", Destreza: " + getDestreza() 
 					+ ", Vitalidade: " + getVitalidade() + ", Agilidade: " + getAgilidade();
-					//+ "Equipamento de Ataque | Dano:" + getEquipamentoAtaque().informaçãoEquipamento()
+					//+ "Equipamento de Ataque | Dano:" + (String)this.equipamentoAtaque.informaçãoEquipamento();
 					//+ "Equipamento de Defesa | Poder:" + getEquipamentoDefesa().informaçãoEquipamento();
 		return retorno;
 	}
+	
 
 	@Override
 	public void posicionar(int x, int y) {
@@ -170,5 +166,29 @@ public class Personagem implements IPersonagem {
 	@Override
 	public int getPosicaoY() {
 		return this.poscicaoY;
+	}
+	/**
+	 * @return the equipamentosAtaque
+	 */
+	public EquipamentoAtaque[] getEquipamentosAtaque() {
+		return equipamentosAtaque;
+	}
+	/**
+	 * @param equipamentosAtaque the equipamentosAtaque to set
+	 */
+	public void setEquipamentosAtaque(EquipamentoAtaque[] equipamentosAtaque) {
+		this.equipamentosAtaque = equipamentosAtaque;
+	}
+	/**
+	 * @return the equipamentosDefesa
+	 */
+	public EquipamentoDefesa[] getEquipamentosDefesa() {
+		return equipamentosDefesa;
+	}
+	/**
+	 * @param equipamentosDefesa the equipamentosDefesa to set
+	 */
+	public void setEquipamentosDefesa(EquipamentoDefesa[] equipamentosDefesa) {
+		this.equipamentosDefesa = equipamentosDefesa;
 	}
 }

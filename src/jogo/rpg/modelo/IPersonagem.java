@@ -17,5 +17,12 @@ public interface IPersonagem {
 	public abstract int getPosicaoX();
 	
 	public abstract int getPosicaoY();
+	
+	public abstract Boolean armaDeDistancia();
+	
+	public abstract Boolean poderDaArma();
+	
+	public abstract Boolean poderDeDefesa();
+	
 
 }
