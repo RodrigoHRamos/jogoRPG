@@ -208,4 +208,9 @@ public class Personagem implements IPersonagem {
 	public int getPoderDeDefesa() {
 		return this.equipamentoDefesa.getPoderDeDefesa();
 	}
+	
+	@Override
+	public void executarAcaoDeCombate(Comando comando) {
+		comando.executar();
+	}
 }

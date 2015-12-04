@@ -24,5 +24,5 @@ public interface IPersonagem {
 	
 	public abstract int getPoderDeDefesa();
 	
-
+	void executarAcaoDeCombate(Comando comando);
 }

@@ -104,22 +104,25 @@ public class ControladorDeCombate {
 
 	public void executarAcaoSelecionada(int opcao) {
 		switch (opcao) {
-		case 1:
-			//atacar();
+		case 1: // atacar
 			//No atacar nao esquecer de mudar a "flag" situacao do combate
+			Comando comandoAtacar = ComandoFactory.getComando(ComandoEnum.ATACAR);
+			
+			/* Problema: como variar as ações entre personagemPrincipal e oponente */
+			//personagem.executarAcaoDeCombate(comando);
 			break;
-		case 2:
-			//mover();
+		case 2: // mover
+			Comando comandoAtacar = ComandoFactory.getComando(ComandoEnum.MOVER);
 			break;
-		case 3:
+		case 3: // ver informações do personagem
 			System.out.println(informacaoJogador(personagemPrincipal));
 			System.out.println(informacaoJogador(oponente));
 			System.out.println("\n");
 			break;
-		case 4:
+		case 4: // exibir arena
 			arena.exibir();
 			break;
-		case 5:
+		case 5: // sair
 			Jogo.finalizarJogo();
 		}
 	}
