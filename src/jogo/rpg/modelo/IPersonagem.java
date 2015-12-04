@@ -20,9 +20,9 @@ public interface IPersonagem {
 	
 	public abstract Boolean armaDeDistancia();
 	
-	public abstract Boolean poderDaArma();
+	public abstract int getPoderDaArma();
 	
-	public abstract Boolean poderDeDefesa();
+	public abstract int getPoderDeDefesa();
 	
 
 }

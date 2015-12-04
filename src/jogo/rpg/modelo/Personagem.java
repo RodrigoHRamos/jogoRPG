@@ -145,8 +145,8 @@ public class Personagem implements IPersonagem {
 		retorno = "\t" + getNome() + " | Pontos de vida: " + getPontosDeVida()
 					+ " - Força: " + getForça() + ", Percepção: " + getPercepcao() + ", Destreza: " + getDestreza() 
 					+ ", Vitalidade: " + getVitalidade() + ", Agilidade: " + getAgilidade();
-					//+ "Equipamento de Ataque | Dano:" + (String)this.equipamentoAtaque.informaçãoEquipamento();
-					//+ "Equipamento de Defesa | Poder:" + getEquipamentoDefesa().informaçãoEquipamento();
+					//+ "Equipamento de Ataque | Dano:" + getPoderDaArma()
+					//+ "Equipamento de Defesa | Poder:" + getPoderDeDefesa();
 		return retorno;
 	}
 	
@@ -190,5 +190,22 @@ public class Personagem implements IPersonagem {
 	 */
 	public void setEquipamentosDefesa(EquipamentoDefesa[] equipamentosDefesa) {
 		this.equipamentosDefesa = equipamentosDefesa;
+	}
+	@Override
+	public Boolean armaDeDistancia() {
+		if(this.equipamentoAtaque.isAtacaDistancia()){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	@Override
+	public int getPoderDaArma() {
+		return this.equipamentoAtaque.getPoderDeDano();
+	}
+	@Override
+	public int getPoderDeDefesa() {
+		return this.equipamentoDefesa.getPoderDeDefesa();
 	}
 }

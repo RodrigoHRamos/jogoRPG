@@ -96,6 +96,19 @@ public class Jogo {
 	private void iniciarCombate() {
 		controladorDeCombate = new ControladorDeCombate();
 		controladorDeCombate.inicarCombate();
+		
+		//Interação com usuário por meio de menus
+		while(controladorDeCombate.getSituacaoDoCombate() ==0){//Eqto o personagem principal não vencer (=1) ou perder (=-1)
+			controladorDeCombate.exibirAcoesCombate();
+			lerEntrada();
+			while (opcaoSelecionada != 1 && opcaoSelecionada != 2 && opcaoSelecionada != 3 && opcaoSelecionada != 4 && opcaoSelecionada != 5) {
+				exibirMensagemDeOpcaoInvalida();
+				controladorDeCombate.exibirAcoesCombate();
+				lerEntrada();
+			}
+			controladorDeCombate.executarAcaoSelecionada(opcaoSelecionada);
+			//Ações da maquina e depois cai no loop novamente
+		}
 	}
 	
 	private void exibirMensagemDeOpcaoInvalida() {

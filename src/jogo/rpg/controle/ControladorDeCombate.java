@@ -14,6 +14,7 @@ import jogo.rpg.modelo.Personagem;
 
 import java.util.Random;
 
+import jogo.rpg.Jogo;
 import jogo.rpg.modelo.Arena;
 
 public class ControladorDeCombate {
@@ -21,7 +22,7 @@ public class ControladorDeCombate {
 	private IPersonagem personagemPrincipal;
 	private IPersonagem oponente;
 	private Arena arena;
-	private int combate;
+	private int situacaoDoCombate =0;// 0 = em combate; -1 personagem principal perdeu o combate; 1 personagem principal ganhou o combate (inicia pós combate)
 	private boolean ehVezdoJogadorPrincipal = true;
 
 	/*
@@ -35,15 +36,14 @@ public class ControladorDeCombate {
 		// Como é tipo ponteiro, as mudanças que eu faço no PersonagemPrincipal
 		// são replicadas no Partida.Personagem
 		personagemPrincipal = Partida.getPersonagem();
-		combate = Partida.getCombate();
 	}
 
 	public void inicarCombate() {
+		setSituacaoDoCombate(0);
 		criarOponente();
 		criarArena();	
 		
 		//-------CRIA EQUIPAMENTOS E EQUIPA -----//
-		
 		// Só pode criar equipamento para o personagemPrincipal uma vez.
 		if(Partida.getCombate()==1){
 			criarEquipamentos(personagemPrincipal);
@@ -52,40 +52,36 @@ public class ControladorDeCombate {
 		else{
 			criarEquipamentos(oponente);
 		}
-		
 		//-------FIM CRIA EQUIPAMENTOS E EQUIPA -----//
 		
 		
 		//-------POSICIONAMENTO NA ARENA -----//
-		
 			//TODO o posicionamento dos personagens está hardcoded pq ainda falta fazer a lógica disso.
 			//Como o foco do projeto é a modelagem, creio que pode ficar assim mesmo.
-		
 		personagemPrincipal.posicionar(1, 4);
 		oponente.posicionar(3, 3);
 		posicionarNaArena(personagemPrincipal, true);
 		posicionarNaArena(oponente, false);
-		
 		//-------FIM DO POSICIONAMENTO NA ARENA -----//
 		
 		//-------EXIBIÇÃO DE INFORMAÇÕES DO ESTADO ATUAL DA PARTIDA -----//
 		System.out.println("\n\n\n\n");
 		System.out.println("Inicio do combate nº:" + Partida.getCombate());
 		System.out.println("Informações dos personagens:");
-		System.out.println(personagemPrincipal.exibirInforPersonagem());
-		System.out.println(oponente.exibirInforPersonagem());
+		System.out.println(informacaoJogador(personagemPrincipal));
+		System.out.println(informacaoJogador(oponente));
 		arena.exibir();
-		//personagemPrincipal.get
-		exibirAcoesCombate();
+		//-------FIM DA EXIBIÇÃO DE INFORMAÇÕES DO ESTADO ATUAL DA PARTIDA -----//
 		
 	}
 
 	public void exibirAcoesCombate() {
 		System.out.println("1: Atacar Oponente");
 		System.out.println("2: Mover");
-		System.out.println("3: Sair");
+		System.out.println("3: Informacões do personagens");
+		System.out.println("4: Exibir Arena");
+		System.out.println("5: Sair");
 		System.out.print("> ");
-		System.out.print("\t Ainda falta programar o resto do jogo. ");
 		
 		/*
 		 * Se escolheu atacar, verifica a distancia e o equipamente de ataque
@@ -97,10 +93,41 @@ public class ControladorDeCombate {
 		 * Após o menu pós combate inicar o combate novamente, e ai fecha o loop e só sai qdo o jogador escolher 'sair'; 
 		 * */
 	}
+	
+	public void exibirAcoesDePosCombate(){
+		System.out.println("1: Revistar Oponente");
+		System.out.println("2: Trocar Equipamento");
+		System.out.println("3: Iniciar novo combate");
+		System.out.println("4: Sair");
+		System.out.print("> ");
+	}
 
 	public void executarAcaoSelecionada(int opcao) {
-
+		switch (opcao) {
+		case 1:
+			//atacar();
+			//No atacar nao esquecer de mudar a "flag" situacao do combate
+			break;
+		case 2:
+			//mover();
+			break;
+		case 3:
+			System.out.println(informacaoJogador(personagemPrincipal));
+			System.out.println(informacaoJogador(oponente));
+			System.out.println("\n");
+			break;
+		case 4:
+			arena.exibir();
+			break;
+		case 5:
+			Jogo.finalizarJogo();
+		}
 	}
+	
+	public void executarAcaoDePosCombate(int opcao){
+		
+	}
+	
 	public void posicionarNaArena(IPersonagem personagem, boolean principal){
 		//TODO lógica para verificar se o local onde será inserido e válido.
 		arena.posicionar(personagem,principal);
@@ -149,6 +176,25 @@ public class ControladorDeCombate {
 		return randomInt;
 	}
 	
-	
+	public String informacaoJogador(IPersonagem p){
+		String retorno;
+		retorno = "\n" + p.exibirInforPersonagem();
+		retorno += "\n \t \t arma do tipo ";
+		if(p.armaDeDistancia())
+			retorno +="distancia";
+		else
+			retorno +="corpo a corpo";
+		retorno += " com dano de: " + p.getPoderDaArma();
+		retorno += " e equipamento de defesa com poder de: " + p.getPoderDeDefesa();
+		return retorno;
+	}
 
+	public int getSituacaoDoCombate() {
+		return situacaoDoCombate;
+	}
+
+	public void setSituacaoDoCombate(int situacaoDoCombate) {
+		this.situacaoDoCombate = situacaoDoCombate;
+	}
+	
 }
