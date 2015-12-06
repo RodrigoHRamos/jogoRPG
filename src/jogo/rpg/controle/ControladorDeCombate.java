@@ -1,21 +1,18 @@
 package jogo.rpg.controle;
 
 import jogo.rpg.modelo.ComandoFactory;
-import jogo.rpg.modelo.Equipamento;
 import jogo.rpg.modelo.EquipamentoAtaque;
 import jogo.rpg.modelo.EquipamentoDefesa;
-import jogo.rpg.modelo.ComandoAtacar;
-import jogo.rpg.modelo.ComandoDefender;
-import jogo.rpg.modelo.ComandoEsquivar;
+import jogo.rpg.modelo.ComandoEnum;
 import jogo.rpg.modelo.PersonagemFactory;
 import jogo.rpg.modelo.IPersonagem;
 import jogo.rpg.modelo.Partida;
-import jogo.rpg.modelo.Personagem;
 
 import java.util.Random;
 
 import jogo.rpg.Jogo;
 import jogo.rpg.modelo.Arena;
+import jogo.rpg.modelo.Comando;
 
 public class ControladorDeCombate {
 
@@ -94,25 +91,46 @@ public class ControladorDeCombate {
 		 * */
 	}
 	
-	public void exibirAcoesDePosCombate(){
-		System.out.println("1: Revistar Oponente");
-		System.out.println("2: Trocar Equipamento");
-		System.out.println("3: Iniciar novo combate");
-		System.out.println("4: Sair");
-		System.out.print("> ");
-	}
-
-	public void executarAcaoSelecionada(int opcao) {
+	public void executarAcaoDeCombate(int opcao) {
+		boolean acaoBemSucedida;
 		switch (opcao) {
 		case 1: // atacar
 			//No atacar nao esquecer de mudar a "flag" situacao do combate
 			Comando comandoAtacar = ComandoFactory.getComando(ComandoEnum.ATACAR);
-			
-			/* Problema: como variar as ações entre personagemPrincipal e oponente */
-			//personagem.executarAcaoDeCombate(comando);
+			if(ehVezdoJogadorPrincipal){
+				System.out.println("\nChance de acerto do Personagem Principal: " + personagemPrincipal.getPercentualAtaque());
+				System.out.println("Chance de defesa do Oponente: " + oponente.getPercentualDefesa());
+				System.out.println("Chance de esquiva do Oponente: " + oponente.getPercentualEsquiva());
+				acaoBemSucedida = comandoAtacar.executar(personagemPrincipal, oponente);
+				if(acaoBemSucedida){
+					//TODO causar dano
+					System.out.println("Ataque bem sucedido\n");
+				}else
+					System.out.println("Ataque mal sucedido\n");
+				ehVezdoJogadorPrincipal = false; // "troca o turno"
+			}
+			else{
+				System.out.println("\nChance de acerto do Oponente: " + oponente.getPercentualAtaque());
+				System.out.println("Chance de defesa do Personagem Principal: " + personagemPrincipal.getPercentualDefesa());
+				System.out.println("Chance de esquiva do Personagem Principal: " + personagemPrincipal.getPercentualEsquiva());
+				acaoBemSucedida = comandoAtacar.executar(oponente,personagemPrincipal);
+				if(acaoBemSucedida){
+					//TODO causar dano
+					System.out.println("Ataque bem sucedido\n");
+				}else
+					System.out.println("Ataque mal sucedido\n");
+				ehVezdoJogadorPrincipal = true; // "troca o turno"
+			}
 			break;
 		case 2: // mover
-			Comando comandoAtacar = ComandoFactory.getComando(ComandoEnum.MOVER);
+			if(ehVezdoJogadorPrincipal)
+				ehVezdoJogadorPrincipal=false;
+			Comando comandoMover = ComandoFactory.getComando(ComandoEnum.MOVER);
+			acaoBemSucedida = comandoMover.executar(personagemPrincipal, oponente);
+			while(!acaoBemSucedida){
+				System.out.println("Não foi possível mover, escolha outra direcao");
+				acaoBemSucedida = comandoMover.executar(personagemPrincipal, oponente);
+			}
 			break;
 		case 3: // ver informações do personagem
 			System.out.println(informacaoJogador(personagemPrincipal));
@@ -125,6 +143,14 @@ public class ControladorDeCombate {
 		case 5: // sair
 			Jogo.finalizarJogo();
 		}
+	}
+	
+	public void exibirAcoesDePosCombate(){
+		System.out.println("1: Revistar Oponente");
+		System.out.println("2: Trocar Equipamento");
+		System.out.println("3: Iniciar novo combate");
+		System.out.println("4: Sair");
+		System.out.print("> ");
 	}
 	
 	public void executarAcaoDePosCombate(int opcao){

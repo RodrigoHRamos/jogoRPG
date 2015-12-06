@@ -24,5 +24,12 @@ public interface IPersonagem {
 	
 	public abstract int getPoderDeDefesa();
 	
-	void executarAcaoDeCombate(Comando comando);
+	public abstract int getPercentualAtaque();
+	
+	public abstract int getPercentualDefesa();
+	
+	public abstract int getPercentualEsquiva();
+	
+	
+	
 }

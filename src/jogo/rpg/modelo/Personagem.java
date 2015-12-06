@@ -22,7 +22,6 @@ public class Personagem implements IPersonagem {
 	
 	private int poscicaoY;
 	
-	private Comando acao;
 
 	private EquipamentoAtaque equipamentoAtaque;
 
@@ -138,15 +137,12 @@ public class Personagem implements IPersonagem {
 	/**
 	 * retorna uma string já formatada com as informacoes do personagem
 	 * */
-	//TODO acrescentar informações dos equipamentos
 	public String exibirInforPersonagem() {
 		//Ainda falta colocar todas as outras informações do persongem
 		String retorno;
 		retorno = "\t" + getNome() + " | Pontos de vida: " + getPontosDeVida()
 					+ " - Força: " + getForça() + ", Percepção: " + getPercepcao() + ", Destreza: " + getDestreza() 
 					+ ", Vitalidade: " + getVitalidade() + ", Agilidade: " + getAgilidade();
-					//+ "Equipamento de Ataque | Dano:" + getPoderDaArma()
-					//+ "Equipamento de Defesa | Poder:" + getPoderDeDefesa();
 		return retorno;
 	}
 	
@@ -210,7 +206,28 @@ public class Personagem implements IPersonagem {
 	}
 	
 	@Override
-	public void executarAcaoDeCombate(Comando comando) {
-		comando.executar();
+	public int getPercentualAtaque() {
+		//Calcula chance de acertar de acordo com o requisito 2.1.15
+		int chanceAcerto = this.getDestreza()*8;
+		if (chanceAcerto > 95)
+			chanceAcerto = 95;
+		return chanceAcerto;
 	}
+	@Override
+	public int getPercentualDefesa() {
+		//Calcula chance de defesa de acordo com o requisito 2.1.16
+		int chanceDefesa = this.getForça()*4 + this.getAgilidade()*3;
+		if (chanceDefesa > 95)
+			chanceDefesa = 95;
+		return chanceDefesa;
+	}
+	@Override
+	public int getPercentualEsquiva() {
+		//Calcula chance de esquiva de acordo com o requisito 2.1.17
+		int chanceEsquiva = this.getPercepcao()*4 + this.getAgilidade()*3;
+		if (chanceEsquiva > 95)
+			chanceEsquiva = 95;
+		return chanceEsquiva;
+	}
+	
 }

@@ -106,8 +106,15 @@ public class Jogo {
 				controladorDeCombate.exibirAcoesCombate();
 				lerEntrada();
 			}
-			controladorDeCombate.executarAcaoSelecionada(opcaoSelecionada);
-			//Ações da maquina e depois cai no loop novamente
+			controladorDeCombate.executarAcaoDeCombate(opcaoSelecionada);
+			//A IA só executa se o personagem atacar ou mover
+			if(opcaoSelecionada == 1 || opcaoSelecionada == 2){
+				//Ações da maquina e depois cai no loop novamente
+				//TODO desenvolver a IA do oponente
+				//Por eqto a IA só ataca... :(
+				controladorDeCombate.executarAcaoDeCombate(1);
+			}
+			
 		}
 	}
 	

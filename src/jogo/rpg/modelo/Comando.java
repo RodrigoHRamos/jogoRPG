@@ -2,6 +2,7 @@ package jogo.rpg.modelo;
 
 public interface Comando {
 
-	public abstract void executar();
+	
+	public abstract Boolean executar(IPersonagem personagemPrincipal,IPersonagem oponente);
 
 }
