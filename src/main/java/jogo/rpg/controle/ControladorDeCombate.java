@@ -35,7 +35,7 @@ public class ControladorDeCombate {
 		personagemPrincipal = Partida.getPersonagem();
 	}
 
-	public void inicarCombate() {
+	public void inicarCombate() {		
 		setSituacaoDoCombate(0);
 		criarOponente();
 		criarArena();	
