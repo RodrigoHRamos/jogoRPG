@@ -91,6 +91,7 @@ public class ControladorDeCombate {
 		 * */
 	}
 	
+	@SuppressWarnings("unused")
 	public void executarAcaoDeCombate(int opcao) {
 		boolean acaoBemSucedida;
 		switch (opcao) {
@@ -123,13 +124,19 @@ public class ControladorDeCombate {
 			}
 			break;
 		case 2: // mover
-			if(ehVezdoJogadorPrincipal)
-				ehVezdoJogadorPrincipal=false;
-			Comando comandoMover = ComandoFactory.getComando(ComandoEnum.MOVER);
-			acaoBemSucedida = comandoMover.executar(personagemPrincipal, oponente);
-			while(!acaoBemSucedida){
-				System.out.println("Não foi possível mover, escolha outra direcao");
+			//TODO implementar a movimentação
+			if(true){//Eqto não estiver pronta a parte do else mostra essa msg, só fiz isso para não ter q comentar o código e perder legibilidade.
+				System.out.println("Ainda falta implementar a movimentação");
+			}
+			else{
+				if(ehVezdoJogadorPrincipal)
+					ehVezdoJogadorPrincipal=false;
+				Comando comandoMover = ComandoFactory.getComando(ComandoEnum.MOVER);
 				acaoBemSucedida = comandoMover.executar(personagemPrincipal, oponente);
+				while(!acaoBemSucedida){
+					System.out.println("Não foi possível mover, escolha outra direcao");
+					acaoBemSucedida = comandoMover.executar(personagemPrincipal, oponente);
+				}
 			}
 			break;
 		case 3: // ver informações do personagem
