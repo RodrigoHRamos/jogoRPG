@@ -20,7 +20,7 @@ public class ControladorDeCombate {
 	private IPersonagem oponente;
 	private Arena arena;
 	private int situacaoDoCombate =0;// 0 = em combate; -1 personagem principal perdeu o combate; 1 personagem principal ganhou o combate (inicia pós combate)
-	private boolean ehVezdoJogadorPrincipal = true;
+	private boolean ehVezdoJogadorPrincipal;
 
 	/*
 	 * O Controlador do combate precisa saber quem é o personagem pricipal e
@@ -35,7 +35,8 @@ public class ControladorDeCombate {
 		personagemPrincipal = Partida.getPersonagem();
 	}
 
-	public void inicarCombate() {		
+	public void inicarCombate() {
+		ehVezdoJogadorPrincipal = true;
 		setSituacaoDoCombate(0);
 		criarOponente();
 		criarArena();	
